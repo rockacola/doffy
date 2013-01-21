@@ -20,7 +20,7 @@ There are some limitations of current version of doffy you should be aware of. T
 
 License
 -----
-Copyright (c) Travis Lin licensed under the MIT License. You are free to use/modify the source code whatever you want, as long as you retain names of contributor(s) of this project.
+Copyright (c) Travis Lin licensed under the [MIT License](https://github.com/rockacola/doffy/blob/master/LICENSE.txt). You are free to use/modify the source code whatever you want, as long as you retain names of contributor(s) of this project.
 
 
 
