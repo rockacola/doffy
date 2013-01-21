@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <script type="text/javascript" src="../src/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="../src/jquery.doffy.js"></script>
+    <style>
+        
+        .failed {
+            background-color: red;
+        }
+        .success {
+            background-color: green;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Test Cases</h1>
+    
+    <!--
+        Expected Hyperfocal Distance values are as referenced from DOFMaster's Depth of Field Calculator:
+        http://www.dofmaster.com/dofjs.html
+    -->
+    <table id="test-cases" border="1" cellpadding="1" cellspacing="1">
+        <thead>
+            <tr>
+                <th>Focal Length</th>
+                <th>f-Number</th>
+                <th>CoC</th>
+                <th>Focus Distance</th>
+                <th>Expected Hyperfocal Distance</th>
+                <th>Actual Hyperfocal Distance</th>
+                <th>Accuracy</th>
+                <th>Expected Near Focus Limit</th>
+                <th>Actual Near Focus Limit</th>
+                <th>Accuracy</th>
+                <th>Expected Far Focus Limit</th>
+                <th>Actual Far Focus Limit</th>
+                <th>Accuracy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="focal-length">               <span class="value">24</span>       <span class="unit">mm</span>    </td>
+                <td class="f-number">                   <span class="unit">f</span>         <span class="value">2.8</span>  </td>
+                <td class="coc">                        <span class="value">0.029</span>    <span class="unit">mm</span>    </td>
+                <td class="focus-distance">             <span class="value">3000</span>     <span class="unit">mm</span>    </td>
+                <td class="expected-hyperfocal">        <span class="value">6812</span>     <span class="unit">mm</span>    </td>
+                <td class="actual-hyperfocal">          <span class="value"></span>         <span class="unit">mm</span>    </td>
+                <td class="accuracy-hyperfocal">        <span class="value"></span>         <span class="unit">%</span>     </td>
+                <td class="expected-near-focus-limit">  <span class="value">2086</span>     <span class="unit">mm</span>    </td>
+                <td class="actual-near-focus-limit">    <span class="value"></span>         <span class="unit">mm</span>    </td>
+                <td class="accuracy-near-focus-limit">  <span class="value"></span>         <span class="unit">%</span>     </td>
+                <td class="expected-far-focus-limit">   <span class="value">5342</span>     <span class="unit">mm</span>    </td>
+                <td class="actual-far-focus-limit">     <span class="value"></span>         <span class="unit">mm</span>    </td>
+                <td class="accuracy-far-focus-limit">   <span class="value"></span>         <span class="unit">%</span>     </td>
+            </tr>
+            <tr>
+                <td class="focal-length">               <span class="value">35</span>       <span class="unit">mm</span>    </td>
+                <td class="f-number">                   <span class="unit">f</span>         <span class="value">2.8</span>  </td>
+                <td class="coc">                        <span class="value">0.029</span>    <span class="unit">mm</span>    </td>
+                <td class="focus-distance">             <span class="value">3000</span>     <span class="unit">mm</span>    </td>
+                <td class="expected-hyperfocal">        <span class="value">14472</span>    <span class="unit">mm</span>    </td>
+                <td class="actual-hyperfocal">          <span class="value"></span>         <span class="unit">mm</span>    </td>
+                <td class="accuracy-hyperfocal">        <span class="value"></span>         <span class="unit">%</span>     </td>
+                <td class="expected-near-focus-limit">  <span class="value">2489</span>     <span class="unit">mm</span>    </td>
+                <td class="actual-near-focus-limit">    <span class="value"></span>         <span class="unit">mm</span>    </td>
+                <td class="accuracy-near-focus-limit">  <span class="value"></span>         <span class="unit">%</span>     </td>
+                <td class="expected-far-focus-limit">   <span class="value">3775</span>     <span class="unit">mm</span>    </td>
+                <td class="actual-far-focus-limit">     <span class="value"></span>         <span class="unit">mm</span>    </td>
+                <td class="accuracy-far-focus-limit">   <span class="value"></span>         <span class="unit">%</span>     </td>
+            </tr>
+            <tr>
+                <td class="focal-length">               <span class="value">50</span>       <span class="unit">mm</span>    </td>
+                <td class="f-number">                   <span class="unit">f</span>         <span class="value">2.8</span>  </td>
+                <td class="coc">                        <span class="value">0.029</span>    <span class="unit">mm</span>    </td>
+                <td class="focus-distance">             <span class="value">3000</span>     <span class="unit">mm</span>    </td>
+                <td class="expected-hyperfocal">        <span class="value">29513</span>    <span class="unit">mm</span>    </td>
+                <td class="actual-hyperfocal">          <span class="value"></span>         <span class="unit">mm</span>    </td>
+                <td class="accuracy-hyperfocal">        <span class="value"></span>         <span class="unit">%</span>     </td>
+                <td class="expected-near-focus-limit">  <span class="value">2727</span>     <span class="unit">mm</span>    </td>
+                <td class="actual-near-focus-limit">    <span class="value"></span>         <span class="unit">mm</span>    </td>
+                <td class="accuracy-near-focus-limit">  <span class="value"></span>         <span class="unit">%</span>     </td>
+                <td class="expected-far-focus-limit">   <span class="value">3334</span>     <span class="unit">mm</span>    </td>
+                <td class="actual-far-focus-limit">     <span class="value"></span>         <span class="unit">mm</span>    </td>
+                <td class="accuracy-far-focus-limit">   <span class="value"></span>         <span class="unit">%</span>     </td>
+            </tr>
+        <tbody>
+    </table>
+    
+    
+    
+    
+    <!-- Le Javascript Implementation -->
+    <script type="text/javascript">
+        //-- Act
+        $("table#test-cases tbody tr").each(function(){
+            var focalLength     = parseFloat($(this).find(".focal-length .value").text());
+            var fNumber         = parseFloat($(this).find(".f-number .value").text());
+            var coc             = parseFloat($(this).find(".coc .value").text());
+            var focusDistance   = parseFloat($(this).find(".focus-distance .value").text());
+            
+            var hyperfocal      = $.CalculateHyperfocalDistance(focalLength, fNumber, coc);
+            var nearFocusLimit = $.CalculateNearFocusLimit(hyperfocal, focusDistance);
+            var farFocusLimit = $.CalculateFarFocusLimit(hyperfocal, focusDistance);
+            
+            $(this).find(".actual-hyperfocal .value").text(hyperfocal.toFixed(2));
+            $(this).find(".actual-near-focus-limit .value").text(nearFocusLimit.toFixed(2));
+            $(this).find(".actual-far-focus-limit .value").text(farFocusLimit.toFixed(2));
+        });
+        
+        //-- Calculate Percentage
+        var ACCEPTABLE_ACCURACY_PERCENTAGE = 95;
+        $("table#test-cases tbody tr").each(function(){
+            var expectedHyperfocal              = parseFloat($(this).find(".expected-hyperfocal .value").text());
+            var actualHyperfocal                = parseFloat($(this).find(".actual-hyperfocal .value").text());
+            var hyperfocalAccuracy              = (1 - Math.abs(actualHyperfocal - expectedHyperfocal) / expectedHyperfocal) * 100;
+            var hyperfocalAccuracyCssClass      = (hyperfocalAccuracy > ACCEPTABLE_ACCURACY_PERCENTAGE) ? "success" : "failed";
+            $(this).find(".accuracy-hyperfocal .value").text(hyperfocalAccuracy.toFixed(2));
+            $(this).find(".accuracy-hyperfocal").addClass(hyperfocalAccuracyCssClass);
+            
+            var expectedNearFocusLimit          = parseFloat($(this).find(".expected-near-focus-limit .value").text());
+            var actualNearFocusLimit            = parseFloat($(this).find(".actual-near-focus-limit .value").text());
+            var nearFocusLimitAccuracy          = (1 - Math.abs(actualNearFocusLimit - expectedNearFocusLimit) / expectedNearFocusLimit) * 100;
+            var nearFocusLimitAccuracyCssClass  = (nearFocusLimitAccuracy > ACCEPTABLE_ACCURACY_PERCENTAGE) ? "success" : "failed";
+            $(this).find(".accuracy-near-focus-limit .value").text(nearFocusLimitAccuracy.toFixed(2));
+            $(this).find(".accuracy-near-focus-limit").addClass(nearFocusLimitAccuracyCssClass);
+            
+            var expectedFarFocusLimit           = parseFloat($(this).find(".expected-far-focus-limit .value").text());
+            var actualFarFocusLimit             = parseFloat($(this).find(".actual-far-focus-limit .value").text());
+            var farFocusLimitAccuracy           = (1 - Math.abs(actualFarFocusLimit - expectedFarFocusLimit) / expectedFarFocusLimit) * 100;
+            var farFocusLimitAccuracyCssClass   = (farFocusLimitAccuracy > ACCEPTABLE_ACCURACY_PERCENTAGE) ? "success" : "failed";
+            $(this).find(".accuracy-far-focus-limit .value").text(farFocusLimitAccuracy.toFixed(2));
+            $(this).find(".accuracy-far-focus-limit").addClass(farFocusLimitAccuracyCssClass);
+        });
+    </script>
+
+</body>
+</html>
