@@ -1,18 +1,26 @@
 /*!
- * Doffy Depth of Field Calculator
- * http://travislin.com/doffy
- *
- * Copyright 2011, Travis Lin
- * Dual licensed under the MIT or GPL Version 2 licenses.
- *
- * Date: 2013-01-19
- * 
- * Known Bugs:
- *      - DoF goes negative when Subject Distance > Hyperfocal
- *      - DoF goes 0 when Subject Distance is too close (eg/ 0.2m)
+ * Doffy - Depth of Field Calculator
+ * @name jquery.doffy.js
+ * @description jQuery calculator plugin computes Depth of Field of specified lens attributes. 
+ * @author Travis Lin - http://travislin.com/doffy
+ * @version 1.1.0
+ * @date 2013-01-22
+ * @copyright (c) 2013 Travis Lin - http://travislin.com/doffy
+ * @license MIT license
+ * @example TBA
  */
 (function($){
-
+    
+	/*
+	 * Set Default Options
+	 */
+	$.Doffy = {
+		version: "1.1.0",
+		setDefaults: function(options){
+			$.extend(defaults, options);
+		}
+	};
+    
 	/*
 	 * Set Default Configuration
 	 */
@@ -38,91 +46,21 @@
 		// a callback function to run once a parsing error has cleared
 		, onParseClear: null
 	};
-	
-    
-    
-	/*
-	 * Set Default Options
-	 */
-	$.Calculation = {
-		version: "1.1.0",
-		setDefaults: function(options){
-			$.extend(defaults, options);
-		}
-	};
-    
-    
-    
-	/*
-	 * jQuery.fn.parseNumber()
-	 *
-	 * returns Array - detects the DOM element and returns it's value. input
-	 *                 elements return the field value, other DOM objects
-	 *                 return their text node
-	 *
-	 * NOTE: Breaks the jQuery chain, since it returns a Number.
-	 *
-	 * Examples:
-	 * $("input[name^='price']").parseNumber();
-	 * > This would return an array of potential number for every match in the selector
-	 *
-	 */
-	$.fn.parseNumber = function(options){
-		var aValues = [];
-		options = $.extend(options, defaults);
-		
-		this.each(
-			function (){
-				var
-					// get a pointer to the current element
-					$el = $(this),
-					// determine what method to get it's value
-					sMethod = ($el.is(":input") ? (defaults.useFieldPlugin ? "getValue" : "val") : "text"),
-					// parse the string and get the first number we find
-					v = $.trim($el[sMethod]()).match(defaults.reNumbers, "");
-					
-				// if the value is null, use 0
-				if( v == null ){
-					v = 0; // update value
-					// if there's a error callback, execute it
-					if( jQuery.isFunction(options.onParseError) ) options.onParseError.apply($el, [sMethod]);
-					$.data($el[0], "calcParseError", true);
-				// otherwise we take the number we found and remove any commas
-				} else {
-					// clense the number one more time to remove extra data (like commas and dollar signs)
-					v = options.cleanseNumber.apply(this, [v[0]]);
-					// if there's a clear callback, execute it
-					if( $.data($el[0], "calcParseError") && jQuery.isFunction(options.onParseClear) ){
-						options.onParseClear.apply($el, [sMethod]);
-						// clear the error flag
-						$.data($el[0], "calcParseError", false);
-					} 
-				}
-				aValues.push(parseFloat(v, 10));
-			}
-		);
-        
-		// return an array of values
-		return aValues;
-	};
-    
     
 	/*
 	 * jQuery.fn.hyperfocal()
 	 */
     $.fn.hyperfocal = function(addressOfFocalLength, addressOfFNumber, addressOfCoc){
         //-- Arrange
-        var focalLength = parseFloat($(addressOfFocalLength).parseNumber());
-        var fNumber = parseFloat($(addressOfFNumber).parseNumber());
-        var coc = parseFloat($(addressOfCoc).parseNumber());
+        var focalLength = $(addressOfFocalLength).parseFloatNumber();
+        var fNumber = $(addressOfFNumber).parseFloatNumber();
+        var coc = $(addressOfCoc).parseFloatNumber();
         
         //-- Act
         var hyperfocal = $.CalculateHyperfocalDistance(focalLength, fNumber, coc);
         
         //-- Output
-        this.val(hyperfocal);
-        this.text(hyperfocal);
-        return this;
+        return $(this).printValue(hyperfocal);
     };
     
 	/*
@@ -130,16 +68,14 @@
 	 */
     $.fn.nearFocusLimit = function(addressOfHyperfocalDistance, addressOfFocusDistance){
         //-- Arrange
-        var hyperfocalDistance = parseFloat($(addressOfHyperfocalDistance).parseNumber());
-        var focusDistance = parseFloat($(addressOfFocusDistance).parseNumber());
+        var hyperfocalDistance = $(addressOfHyperfocalDistance).parseFloatNumber();
+        var focusDistance = $(addressOfFocusDistance).parseFloatNumber();
         
         //-- Act
         var nearFocusLimit = $.CalculateNearFocusLimit(hyperfocalDistance, focusDistance);
         
         //-- Output
-        this.val(nearFocusLimit);
-        this.text(nearFocusLimit);
-        return this;
+        return $(this).printValue(nearFocusLimit);
     };
     
 	/*
@@ -147,16 +83,14 @@
 	 */
     $.fn.farFocusLimit = function(addressOfHyperfocalDistance, addressOfFocusDistance){
         //-- Arrange
-        var hyperfocalDistance = parseFloat($(addressOfHyperfocalDistance).parseNumber());
-        var focusDistance = parseFloat($(addressOfFocusDistance).parseNumber());
+        var hyperfocalDistance = $(addressOfHyperfocalDistance).parseFloatNumber();
+        var focusDistance = $(addressOfFocusDistance).parseFloatNumber();
         
         //-- Act
         var farFocusLimit = $.CalculateFarFocusLimit(hyperfocalDistance, focusDistance);
         
         //-- Output
-        this.val(farFocusLimit);
-        this.text(farFocusLimit);
-        return this;
+        return $(this).printValue(farFocusLimit);
     };
     
 	/*
@@ -164,19 +98,15 @@
 	 */
     $.fn.depthOfField = function(addressOfHyperfocalDistance, addressOfFocusDistance){
         //-- Arrange
-        var hyperfocalDistance = parseFloat($(addressOfHyperfocalDistance).parseNumber());
-        var focusDistance = parseFloat($(addressOfFocusDistance).parseNumber());
+        var hyperfocalDistance = $(addressOfHyperfocalDistance).parseFloatNumber();
+        var focusDistance = $(addressOfFocusDistance).parseFloatNumber();
         
         //-- Act
         var dof = $.CalculateDepthOfField(hyperfocalDistance, focusDistance);
         
         //-- Output
-        this.val(dof);
-        this.text(dof);
-        return this;
-    };    
-    
-    
+        return $(this).printValue(dof);
+    };
     
 	/*
 	 * Direct Accessible Methods to Depth of Field Calculator
@@ -199,8 +129,6 @@
         return far - near;
     };
     
-        
-    
 	/*
 	 * Mathmatical Functions
 	 */
@@ -220,5 +148,56 @@
             return (hyperfocalDistance * focusDistance) / (hyperfocalDistance - focusDistance);
         }
 	};
+    
+	/*
+	 * jQuery.fn.parseNumber()
+	 * extract float value within a given HTML element
+     * NOTE: Breaks the jQuery chain, since it returns a float value.
+	 */
+    $.fn.parseFloatNumber = function(options){
+        //-- Arrange
+        options = $.extend(options, defaults);
+        var targetElement = $(this);
+        
+        //-- Act
+        var fetchMethod = targetElement.is(":input") ? (defaults.useFieldPlugin ? "getValue" : "val") : "text";
+        var result = $.trim(targetElement[fetchMethod]()).match(defaults.reNumbers, "");
+        
+        if(result == null) {
+            result = 0;
+            // if there's a error callback, execute it
+            if(jQuery.isFunction(options.onParseError)) {
+                options.onParseError.apply(targetElement, [fetchMethod]);
+                $.data(targetElement[0], "calcParseError", true);
+            }
+        } else {
+            // clense the number one more time to remove extra data (like commas and dollar signs)
+            result = options.cleanseNumber.apply(this, [result[0]]);
+            // if there's a clear callback, execute it
+            if( $.data(targetElement[0], "calcParseError") && jQuery.isFunction(options.onParseClear) ){
+                options.onParseClear.apply(targetElement, [fetchMethod]);
+                // clear the error flag
+                $.data(targetElement[0], "calcParseError", false);
+            }
+        }
+        
+        //-- Output
+        result = parseFloat(result);
+        return result;
+    }
+    
+	/*
+	 * jQuery.fn.printValue()
+	 * Output and display any value to a specified HTML element
+	 */
+    $.fn.printValue = function(value){
+        //-- Arrange
+        var targetElement = $(this);
+        //-- Act
+        var fetchMethod = targetElement.is(":input") ? (defaults.useFieldPlugin ? "getValue" : "val") : "text";
+        targetElement[fetchMethod](value);
+        //-- Output
+        return targetElement;
+    }
     
 })(jQuery);

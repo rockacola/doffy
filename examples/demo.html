@@ -11,34 +11,34 @@
     <p id="calculate-doffy">
         Focal Length                <input type="text" class="focal-length"     value="50" size="2" />mm
         <br />f-Number:             <input type="text" class="f-number"         value="2.8" size="2" />
-        <br />Circle of Confusion:  <input type="text" class="coc"              value="0.029" size="2" />mm
+        <br />Circle of Confusion:  <input type="text" class="coc"              value="0.032" size="2" />mm
         <br />Focus Distance:       <input type="text" class="focus-distance"   value="3000" size="2" />mm
         <br /><input type="button" class="go" value="Go" />
-        <br /><strong>Hyperfocal distance:</strong> <input type="text" class="hyperfocal"       value="" size="6" />mm
-        <br /><strong>Near focus limit:</strong>    <input type="text" class="near-focus-limit" value="" size="6" />mm
-        <br /><strong>Far focus limit:</strong>     <input type="text" class="far-focus-limit"  value="" size="6" />mm
-        <br /><strong>Depth of field:</strong>      <input type="text" class="dof"              value="" size="6" />mm
+        <br /><strong>Hyperfocal distance:</strong> <input type="text" class="hyperfocal"       value="" size="18" />mm
+        <br /><strong>Near focus limit:</strong>    <input type="text" class="near-focus-limit" value="" size="18" />mm
+        <br /><strong>Far focus limit:</strong>     <input type="text" class="far-focus-limit"  value="" size="18" />mm
+        <br /><strong>Depth of field:</strong>      <input type="text" class="dof"              value="" size="18" />mm
     </p>
     <!-- Javascript Implementation for Direct Calculator Access -->
     <script type="text/javascript">
         $("#calculate-doffy .go").click(function(){
             //-- Fetch Input
-            var focalLength = parseFloat($("#calculate-doffy .focal-length").val());
-            var fNumber = parseFloat($("#calculate-doffy .f-number").val());
-            var coc = parseFloat($("#calculate-doffy .coc").val());
-            var focusDistance = parseFloat($("#calculate-doffy .focus-distance").val());
+            var focalLength     = $("#calculate-doffy .focal-length").parseFloatNumber();
+            var fNumber         = $("#calculate-doffy .f-number").parseFloatNumber();
+            var coc             = $("#calculate-doffy .coc").parseFloatNumber();
+            var focusDistance   = $("#calculate-doffy .focus-distance").parseFloatNumber();
             
             //-- Calculate
-            var hyperfocal = $.CalculateHyperfocalDistance(focalLength, fNumber, coc);
-            var nearFocusLimit = $.CalculateNearFocusLimit(hyperfocal, focusDistance);
-            var farFocusLimit = $.CalculateFarFocusLimit(hyperfocal, focusDistance);
-            var dof = $.CalculateDepthOfField(hyperfocal, focusDistance);
+            var hyperfocal      = $.CalculateHyperfocalDistance(focalLength, fNumber, coc);
+            var nearFocusLimit  = $.CalculateNearFocusLimit(hyperfocal, focusDistance);
+            var farFocusLimit   = $.CalculateFarFocusLimit(hyperfocal, focusDistance);
+            var dof             = $.CalculateDepthOfField(hyperfocal, focusDistance);
             
             //-- Print Response
-            $("#calculate-doffy .hyperfocal").val(hyperfocal);
-            $("#calculate-doffy .near-focus-limit").val(nearFocusLimit);
-            $("#calculate-doffy .far-focus-limit").val(farFocusLimit);
-            $("#calculate-doffy .dof").val(dof);
+            $("#calculate-doffy .hyperfocal").printValue(hyperfocal);
+            $("#calculate-doffy .near-focus-limit").printValue(nearFocusLimit);
+            $("#calculate-doffy .far-focus-limit").printValue(farFocusLimit);
+            $("#calculate-doffy .dof").printValue(dof);
         });
     </script>
     
@@ -48,13 +48,13 @@
     <p id="calculate-luffy">
         Focal Length                <input type="text" class="focal-length"     value="50" size="2" />mm
         <br />f-Number:             <input type="text" class="f-number"         value="2.8" size="2" />
-        <br />Circle of Confusion:  <input type="text" class="coc"              value="0.029" size="2" />mm
+        <br />Circle of Confusion:  <input type="text" class="coc"              value="0.032" size="2" />mm
         <br />Focus Distance:       <input type="text" class="focus-distance"   value="3000" size="2" />mm
         <br /><input type="button" class="go" value="Go" />
-        <br /><strong>Hyperfocal distance:</strong> <input type="text" class="hyperfocal"       value="" size="6" />mm
-        <br /><strong>Near focus limit:</strong>    <input type="text" class="near-focus-limit" value="" size="6" />mm
-        <br /><strong>Far focus limit:</strong>     <input type="text" class="far-focus-limit"  value="" size="6" />mm
-        <br /><strong>Depth of field:</strong>      <input type="text" class="dof"              value="" size="6" />mm
+        <br /><strong>Hyperfocal distance:</strong> <input type="text" class="hyperfocal"       value="" size="18" />mm
+        <br /><strong>Near focus limit:</strong>    <input type="text" class="near-focus-limit" value="" size="18" />mm
+        <br /><strong>Far focus limit:</strong>     <input type="text" class="far-focus-limit"  value="" size="18" />mm
+        <br /><strong>Depth of field:</strong>      <input type="text" class="dof"              value="" size="18" />mm
     </p>
     <!-- Javascript Implementation for Access with Element Manipulations -->
     <script type="text/javascript">
