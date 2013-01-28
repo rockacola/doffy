@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <script type="text/javascript" src="../src/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="../include/jquery-1.9.0.min.js"></script>
     <script type="text/javascript" src="../src/jquery.doffy.js"></script>
 </head>
 <body>
@@ -30,9 +30,9 @@
             
             //-- Calculate
             var hyperfocal      = $.CalculateHyperfocalDistance(focalLength, fNumber, coc);
-            var nearFocusLimit  = $.CalculateNearFocusLimit(hyperfocal, focusDistance);
-            var farFocusLimit   = $.CalculateFarFocusLimit(hyperfocal, focusDistance);
-            var dof             = $.CalculateDepthOfField(hyperfocal, focusDistance);
+            var nearFocusLimit  = $.CalculateNearFocusLimit(focalLength, hyperfocal, focusDistance);
+            var farFocusLimit   = $.CalculateFarFocusLimit(focalLength, hyperfocal, focusDistance);
+            var dof             = $.CalculateDepthOfField(focalLength, hyperfocal, focusDistance);
             
             //-- Print Response
             $("#calculate-doffy .hyperfocal").printValue(hyperfocal);
@@ -60,9 +60,9 @@
     <script type="text/javascript">
         $("#calculate-luffy .go").click(function(){
             $("#calculate-luffy .hyperfocal").hyperfocal("#calculate-luffy .focal-length", "#calculate-luffy .f-number", "#calculate-luffy .coc");
-            $("#calculate-luffy .near-focus-limit").nearFocusLimit("#calculate-luffy .hyperfocal", "#calculate-luffy .focus-distance");
-            $("#calculate-luffy .far-focus-limit").farFocusLimit("#calculate-luffy .hyperfocal", "#calculate-luffy .focus-distance");
-            $("#calculate-luffy .dof").depthOfField("#calculate-luffy .hyperfocal", "#calculate-luffy .focus-distance");
+            $("#calculate-luffy .near-focus-limit").nearFocusLimit("#calculate-luffy .focal-length", "#calculate-luffy .hyperfocal", "#calculate-luffy .focus-distance");
+            $("#calculate-luffy .far-focus-limit").farFocusLimit("#calculate-luffy .focal-length", "#calculate-luffy .hyperfocal", "#calculate-luffy .focus-distance");
+            $("#calculate-luffy .dof").depthOfField("#calculate-luffy .focal-length", "#calculate-luffy .hyperfocal", "#calculate-luffy .focus-distance");
         });
     </script>
     

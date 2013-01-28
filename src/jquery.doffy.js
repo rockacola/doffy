@@ -3,8 +3,8 @@
  * @name jquery.doffy.js
  * @description jQuery calculator plugin computes Depth of Field of specified lens attributes. 
  * @author Travis Lin - http://travislin.com/doffy
- * @version 1.1.0
- * @date 2013-01-22
+ * @version 1.2.0
+ * @date 2013-01-28
  * @copyright (c) 2013 Travis Lin - http://travislin.com/doffy
  * @license MIT license
  * @example TBA
@@ -15,7 +15,7 @@
 	 * Set Default Options
 	 */
 	$.Doffy = {
-		version: "1.1.0",
+		version: "1.2.0",
 		setDefaults: function(options){
 			$.extend(defaults, options);
 		}
@@ -55,10 +55,8 @@
         var focalLength = $(addressOfFocalLength).parseFloatNumber();
         var fNumber = $(addressOfFNumber).parseFloatNumber();
         var coc = $(addressOfCoc).parseFloatNumber();
-        
         //-- Act
         var hyperfocal = $.CalculateHyperfocalDistance(focalLength, fNumber, coc);
-        
         //-- Output
         return $(this).printValue(hyperfocal);
     };
@@ -66,14 +64,13 @@
 	/*
 	 * jQuery.fn.nearFocusLimit()
 	 */
-    $.fn.nearFocusLimit = function(addressOfHyperfocalDistance, addressOfFocusDistance){
+    $.fn.nearFocusLimit = function(addressOfFocalLength, addressOfHyperfocalDistance, addressOfFocusDistance){
         //-- Arrange
         var hyperfocalDistance = $(addressOfHyperfocalDistance).parseFloatNumber();
         var focusDistance = $(addressOfFocusDistance).parseFloatNumber();
-        
+        var focalLength = $(addressOfFocalLength).parseFloatNumber();
         //-- Act
-        var nearFocusLimit = $.CalculateNearFocusLimit(hyperfocalDistance, focusDistance);
-        
+        var nearFocusLimit = $.CalculateNearFocusLimit(focalLength, hyperfocalDistance, focusDistance);
         //-- Output
         return $(this).printValue(nearFocusLimit);
     };
@@ -81,14 +78,13 @@
 	/*
 	 * jQuery.fn.farFocusLimit()
 	 */
-    $.fn.farFocusLimit = function(addressOfHyperfocalDistance, addressOfFocusDistance){
+    $.fn.farFocusLimit = function(addressOfFocalLength, addressOfHyperfocalDistance, addressOfFocusDistance){
         //-- Arrange
         var hyperfocalDistance = $(addressOfHyperfocalDistance).parseFloatNumber();
         var focusDistance = $(addressOfFocusDistance).parseFloatNumber();
-        
+        var focalLength = $(addressOfFocalLength).parseFloatNumber();
         //-- Act
-        var farFocusLimit = $.CalculateFarFocusLimit(hyperfocalDistance, focusDistance);
-        
+        var farFocusLimit = $.CalculateFarFocusLimit(focalLength, hyperfocalDistance, focusDistance);
         //-- Output
         return $(this).printValue(farFocusLimit);
     };
@@ -96,14 +92,13 @@
 	/*
 	 * jQuery.fn.depthOfField()
 	 */
-    $.fn.depthOfField = function(addressOfHyperfocalDistance, addressOfFocusDistance){
+    $.fn.depthOfField = function(addressOfFocalLength, addressOfHyperfocalDistance, addressOfFocusDistance){
         //-- Arrange
         var hyperfocalDistance = $(addressOfHyperfocalDistance).parseFloatNumber();
         var focusDistance = $(addressOfFocusDistance).parseFloatNumber();
-        
+        var focalLength = $(addressOfFocalLength).parseFloatNumber();
         //-- Act
-        var dof = $.CalculateDepthOfField(hyperfocalDistance, focusDistance);
-        
+        var dof = $.CalculateDepthOfField(focalLength, hyperfocalDistance, focusDistance);
         //-- Output
         return $(this).printValue(dof);
     };
@@ -112,21 +107,43 @@
 	 * Direct Accessible Methods to Depth of Field Calculator
 	 */
     $.CalculateHyperfocalDistance = function(focalLength, fNumber, circleOfConfusion) {
+        //-- Act
         return math["hyperfocalDistance"](focalLength, fNumber, circleOfConfusion);
     };
     
-    $.CalculateNearFocusLimit = function(hyperfocalDistance, focusDistance) {
-        return math["nearFocusLimit"](hyperfocalDistance, focusDistance);
+    $.CalculateNearFocusLimit = function(focalLength, hyperfocalDistance, focusDistance) {
+        //-- Act
+        var result = math["nearFocusLimit"](focalLength, hyperfocalDistance, focusDistance);
+        //-- Validate
+        if(result == null)
+            result = 0;
+        //-- Output
+        return result;
     };
     
-    $.CalculateFarFocusLimit = function(hyperfocalDistance, focusDistance) {
-        return math["farFocusLimit"](hyperfocalDistance, focusDistance);
+    $.CalculateFarFocusLimit = function(focalLength, hyperfocalDistance, focusDistance) {
+        //-- Act
+        var result = math["farFocusLimit"](focalLength, hyperfocalDistance, focusDistance);
+        //-- Validate
+        if(result == null)
+            result = 0;
+        //-- Output
+        return result;
     };
     
-    $.CalculateDepthOfField = function(hyperfocalDistance, focusDistance) {
-        var far = math["farFocusLimit"](hyperfocalDistance, focusDistance);
-        var near = math["nearFocusLimit"](hyperfocalDistance, focusDistance);
-        return far - near;
+    $.CalculateDepthOfField = function(focalLength, hyperfocalDistance, focusDistance) {
+        //-- Arrange
+        var far = math["farFocusLimit"](focalLength, hyperfocalDistance, focusDistance);
+        var near = math["nearFocusLimit"](focalLength, hyperfocalDistance, focusDistance);
+        //-- Validate & Act
+        if(far == null || near == null)
+            var result = 0;
+        else if(far == Infinity)
+            var result = Infinity;
+        else
+            var result = (far - near);
+        //-- Output
+        return result
     };
     
 	/*
@@ -139,13 +156,23 @@
         },
         
         //-- Find Near Focus Limit (in mm)
-        nearFocusLimit: function (hyperfocalDistance, focusDistance){
-            return (hyperfocalDistance * focusDistance) / (hyperfocalDistance + focusDistance);
+        nearFocusLimit: function (focalLength, hyperfocalDistance, focusDistance){
+            if(focusDistance < focalLength)
+                var result = null; // Cannot focus closer to lens front element
+            else
+                var result = (focusDistance * (hyperfocalDistance - focalLength)) / (hyperfocalDistance + focusDistance - (2*focalLength));
+            return result;
         },
         
         //-- Find Far Focus Limit (in mm)
-        farFocusLimit: function (hyperfocalDistance, focusDistance){
-            return (hyperfocalDistance * focusDistance) / (hyperfocalDistance - focusDistance);
+        farFocusLimit: function (focalLength, hyperfocalDistance, focusDistance){
+            if(focusDistance < focalLength)
+                var result = null; // Cannot focus closer to lens front element
+            else if(hyperfocalDistance <= focusDistance)
+                var result = Infinity;
+            else
+                result = (focusDistance * (hyperfocalDistance - focalLength)) / (hyperfocalDistance - focusDistance);
+            return result;
         }
 	};
     
