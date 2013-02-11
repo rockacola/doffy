@@ -43,7 +43,12 @@
     -->
     <script type="text/javascript">
         var cases = [
-              {"focalLength":24, "fNumber":1.4, "coc":0.032, "focusDistance":23,   "expectedHyperfocal":12860,  "expectedNearFocusLimit":0,     "expectedFarFocusLimit":0}
+              {"focalLength":28, "fNumber":11, "coc":0.021, "focusDistance":1000,   "expectedHyperfocal":3380,  "expectedNearFocusLimit":780,   "expectedFarFocusLimit":1400}
+            , {"focalLength":28, "fNumber":11, "coc":0.021, "focusDistance":2000,   "expectedHyperfocal":3380,  "expectedNearFocusLimit":1260,  "expectedFarFocusLimit":4800}
+            , {"focalLength":28, "fNumber":11, "coc":0.021, "focusDistance":3000,   "expectedHyperfocal":3380,  "expectedNearFocusLimit":1600,  "expectedFarFocusLimit":24710}
+            , {"focalLength":28, "fNumber":11, "coc":0.021, "focusDistance":4000,   "expectedHyperfocal":3380,  "expectedNearFocusLimit":1840,  "expectedFarFocusLimit":Infinity}
+            , {"focalLength":28, "fNumber":11, "coc":0.021, "focusDistance":8000,   "expectedHyperfocal":3380,  "expectedNearFocusLimit":2380,  "expectedFarFocusLimit":Infinity}
+            , {"focalLength":24, "fNumber":1.4, "coc":0.032, "focusDistance":23,   "expectedHyperfocal":12860,  "expectedNearFocusLimit":0,     "expectedFarFocusLimit":0}
             , {"focalLength":24, "fNumber":1.4, "coc":0.032, "focusDistance":24,   "expectedHyperfocal":12860,  "expectedNearFocusLimit":24,    "expectedFarFocusLimit":24}
             , {"focalLength":24, "fNumber":1.4, "coc":0.032, "focusDistance":25,   "expectedHyperfocal":12860,  "expectedNearFocusLimit":25,    "expectedFarFocusLimit":25}
             , {"focalLength":24, "fNumber":1.4, "coc":0.032, "focusDistance":1000, "expectedHyperfocal":12860,  "expectedNearFocusLimit":930,   "expectedFarFocusLimit":1080}
