@@ -1,0 +1,31 @@
+{
+  "name": "WebApp",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "ampersand-app": "^1.0.4",
+    "ampersand-events": "^1.1.1",
+    "ampersand-state": "^4.5.6",
+    "ampersand-view": "^9.0.0",
+    "bows": "^1.4.8",
+    "lodash": "^4.1.0"
+  },
+  "devDependencies": {
+    "browser-sync": "2.9.11",
+    "del": "^2.0.2",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-cssnano": "^2.1.0",
+    "gulp-if": "^2.0.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-watch": "^4.3.4"
+  },
+  "//": [
+    "[there is where you add comments about this file]"
+  ]
+}

@@ -1,0 +1,55 @@
+/*
+ * Naming convention:
+ * - use dash as separator
+ * - all lower cases
+ * - use plural when appropriate
+ *
+ * Note:
+ * - Foundation works with mobile-first by convention.
+ */
+
+
+/*
+ * Variables
+ * --------------------------------------------------
+ */
+@import "variables";
+
+/*
+ * Third-party
+ * --------------------------------------------------
+ */
+@import "vendor/foundation/normalize";
+@import "vendor/foundation/foundation/functions"; //NOTE: This is needed by '_settings.scss';
+@import "settings"; // Foundation setting override per project base. This is needed before loading the components
+@import "vendor/foundation/foundation/components/inline-lists";
+//@import "vendor/foundation/foundation/components/buttons";
+//@import "vendor/foundation/foundation/components/grid";
+//@import "vendor/foundation/foundation/components/top-bar";
+//@import "vendor/foundation/foundation/components/type";
+//@import "vendor/foundation/foundation/components/visibility";
+//... Add more Foundation components only as required
+
+/*
+ * Partials
+ * --------------------------------------------------
+ */
+//@import "partials/keyframes";
+@import "partials/buttons";
+//@import "partials/sliders";
+//@import "partials/carousels";
+//@import "partials/icon";
+//@import "partials/notifiers";
+//@import "partials/share";
+@import "partials/utilities";
+@import "partials/animations";
+
+/*
+ * Modules
+ * --------------------------------------------------
+ */
+@import "modules/global"; //This should be the first module you load
+@import "modules/form";
+@import "modules/style-hint";
+@import "modules/visibility-toggles";
+@import "modules/hack"; //This should be the last module you load

@@ -1,0 +1,68 @@
+//
+// Modules / Style Hint
+//
+
+body[data-debug="true"] .style-hint {
+    display: block;
+}
+
+.style-hint {
+    display: none;
+
+    background-color: rgba(blueviolet, 1);
+    position: fixed;
+    width: rem-calc(200);
+    font-size: rem-calc(13);
+    line-height: 1.2;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    border-top-left-radius: rem-calc(8);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    z-index: 200;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    .meta {
+        &::before {
+            display: block;
+            padding: rem-calc(6) rem-calc(10);
+            color: white;
+            content: "lorem";
+        }
+
+        &--width {
+            &::before {
+                content: "Small (" + $small-range + ")";
+                @media #{$medium-up} {
+                    content: "Medium (" + $medium-range + ")";
+                }
+                @media #{$large-up} {
+                    content: "Large (" + $large-range + ")";
+                }
+                @media #{$xlarge-up} {
+                    content: "XLarge (" + $xlarge-range + ")";
+                }
+                @media #{$xxlarge-up} {
+                    content: "XXLarge (" + $xxlarge-range + ")";
+                }
+            }
+        }
+
+        &--orientation {
+            &::before {
+                content: "Orientation: Unknown";
+
+                @media #{$landscape} {
+                    content: "Orientation: Landscape";
+                }
+                @media #{$portrait} {
+                    content: "Orientation: Portrait";
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+//
+// Modules / Variables
+//
+
+/*
+ * Colours
+ * (REF: http://www.december.com/html/spec/colorhex.html)
+ * --------------------------------------------------
+ */
+//$color-steelblue4: #36648B;
+//$color-bluegrapes: #3B4990;
+$color-text-base: #626262;
+
+
+
+/*
+ * Typography
+ * --------------------------------------------------
+ */
+//@import url("//fonts.googleapis.com/css?family=Open+Sans:400");
+//@import url("//fonts.googleapis.com/css?family=Montserrat:700");
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/opensans-regular-webfont.woff2') format('woff2'),
+         url('../fonts/opensans-regular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat-bold-webfont.woff2') format('woff2'),
+         url('../fonts/montserrat-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+$font-open-sans-stack: 'Open Sans', Arial, sans-serif;
+$font-montserrat-stack: 'Montserrat', sans-serif;
+$font-courier-new-stack: 'Courier New', Courier, monospace;
+$font-arial-stack: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+
+
+
+/*
+ * Structure
+ * --------------------------------------------------
+ */
+
+
+
+/*
+ * Legacy
+ * (may or may not have been used)
+ * --------------------------------------------------
+ */
+/*
+// Font weights
+$light: 100;
+$regular: 400;
+$bold: 600;
+// Base Font
+$base-font-family: sans-serif;
+$base-font-weight: $regular;
+$base-font-size: 13px;
+$base-line-height: 1.4;
+// Fixed Font
+$fixed-font-family: monospace;
+$fixed-font-size: 85%;
+$fixed-line-height: $base-line-height;
+// Headings
+$header-font-weight: $bold;*/

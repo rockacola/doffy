@@ -1,0 +1,46 @@
+//
+// Modules / Global
+//
+
+/*
+ * Generic Elements
+ * --------------------------------------------------
+ */
+
+html {
+    body {
+        font-family: $font-open-sans-stack;
+        font-size: 14px;
+        background-color: #fafafa;
+        color: $color-text-base;
+    }
+}
+
+
+
+/*
+ * Standard Structure
+ * --------------------------------------------------
+ */
+
+.outline {
+    background-color: white;
+    min-height: 100%;
+
+    > .wrapper {
+        padding: 20px 40px;
+
+        .intro {
+            margin: 0 1%;
+        }
+
+        .encodings-container {
+            @include clearfix();
+        }
+    }
+
+    @media #{$medium-up} {
+        width: 600px;
+        margin: 0 auto;
+    }
+}

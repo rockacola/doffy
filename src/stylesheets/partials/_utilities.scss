@@ -1,0 +1,41 @@
+//
+// Partial / Utilities
+//
+
+.wrapper {
+    &--relative {
+        position: relative;
+        //width: 100%;
+        height: 100%; //NOTE: Look out for potential side effects for applying this unconsciously
+    }
+}
+
+.absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.flat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+        display: inline-block;
+    }
+}
+
+
+.circle-item {
+    border-radius: 1000px;
+    position: relative;
+
+    > .content {
+        position: absolute;
+        display: block; //NOTE: Look out for potential side effects for applying this unconsciously
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
