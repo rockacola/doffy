@@ -30,6 +30,7 @@ var MainView = View.extend({
     },
 
     events: {
+        'click [data-hook="calculate"]': '_calculateButtonClickHandler',
     },
 
     initialize: function () {
@@ -47,13 +48,26 @@ var MainView = View.extend({
             _this.formInputViews.push(view);
         });
 
+        this._mock();
+
         // Bindings
     },
 
     // Event Handlers ----------------
 
+    _calculateButtonClickHandler: function(e) {
+        log('_calculateButtonClickHandler triggered.');
+        e.preventDefault();
+    },
 
     // Private Methods ----------------
+
+    _mock: function() { // Set default values for the fields
+        Utils.find(this.formInputViews, {type: 'coc'}).SetValue(0.032);
+        Utils.find(this.formInputViews, {type: 'focal-length'}).SetValue(50);
+        Utils.find(this.formInputViews, {type: 'aperture'}).SetValue(2.8);
+        Utils.find(this.formInputViews, {type: 'focus-distance'}).SetValue(5000);
+    },
 
     // Public Methods ----------------
 

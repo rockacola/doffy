@@ -18,6 +18,9 @@ var Utils = require('../base/utils');
 var InputView = View.extend({
 
     props: {
+        type: 'string',
+        unit: 'string',
+        $input: 'element',
     },
 
     bindings: {
@@ -32,6 +35,9 @@ var InputView = View.extend({
         log('initialize()');
 
         // Bootstrap
+        this.type = this.el.getAttribute('data-type');
+        this.unit = this.el.getAttribute('data-unit');
+        this.$input = this.el.querySelector('input');
 
         // Init setup
 
@@ -53,6 +59,10 @@ var InputView = View.extend({
     // Private Methods ----------------
 
     // Public Methods ----------------
+
+    SetValue: function (value) {
+        this.$input.value = value;
+    },
 
 });
 

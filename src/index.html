@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div class="outline" data-hook="outline" data-unit="mm">
+    <div class="outline" data-hook="outline">
         <div class="wrapper wrapper--relative">
 
             <div class="intro">
@@ -20,26 +20,26 @@
             </div>
 
             <div class="input-form">
-                <div class="form-block" data-hook="input--coc">
+                <div class="form-block" data-hook="input--coc" data-type="coc" data-unit="mm">
                     <label>Circle of Confusion</label>
                     <input type="text" class="input"></input>
                 </div>
-                <div class="form-block" data-hook="input--focal-length">
+                <div class="form-block" data-hook="input--focal-length" data-type="focal-length" data-unit="mm">
                     <label>Focal Length</label>
                     <input type="text" class="input"></input>
                 </div>
-                <div class="form-block" data-hook="input--aperture">
+                <div class="form-block" data-hook="input--aperture" data-type="aperture" data-unit="f/">
                     <label>Aperture</label>
                     <input type="text" class="input"></input>
                 </div>
-                <div class="form-block" data-hook="input--focus-distance">
+                <div class="form-block" data-hook="input--focus-distance" data-type="focus-distance" data-unit="mm">
                     <label>Focus Distance</label>
                     <input type="text" class="input"></input>
                 </div>
             </div>
 
             <div class="operators">
-                <button class="button small">Calculate</button>
+                <button class="button small" data-hook="calculate">Calculate</button>
             </div>
 
             <div class="blurb">
