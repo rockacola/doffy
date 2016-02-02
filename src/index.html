@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div class="outline" data-hook="outline">
+    <div class="outline" data-hook="outline" data-unit="mm">
         <div class="wrapper wrapper--relative">
 
             <div class="intro">
@@ -19,11 +19,51 @@
                 </p>
             </div>
 
-            <div class="operators">
-                <ul>
-                </ul>
+            <div class="input-form">
+                <div class="form-block" data-hook="input--coc">
+                    <label>Circle of Confusion</label>
+                    <input type="text" class="input"></input>
+                </div>
+                <div class="form-block" data-hook="input--focal-length">
+                    <label>Focal Length</label>
+                    <input type="text" class="input"></input>
+                </div>
+                <div class="form-block" data-hook="input--aperture">
+                    <label>Aperture</label>
+                    <input type="text" class="input"></input>
+                </div>
+                <div class="form-block" data-hook="input--focus-distance">
+                    <label>Focus Distance</label>
+                    <input type="text" class="input"></input>
+                </div>
             </div>
 
+            <div class="operators">
+                <button class="button small">Calculate</button>
+            </div>
+
+            <div class="blurb">
+                <h3>Results</h3>
+            </div>
+
+            <div class="output-form">
+                <div class="form-block is-disabled" data-hook="input--dof">
+                    <label>Depth of Field</label>
+                    <input type="text" class="input" disabled></input>
+                </div>
+                <div class="form-block is-disabled" data-hook="input--hd">
+                    <label>Hyperfocal Distance</label>
+                    <input type="text" class="input" disabled></input>
+                </div>
+                <div class="form-block is-disabled" data-hook="input--near">
+                    <label>Near Limit</label>
+                    <input type="text" class="input" disabled></input>
+                </div>
+                <div class="form-block is-disabled" data-hook="input--far">
+                    <label>Far Limit</label>
+                    <input type="text" class="input" disabled></input>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -23,7 +23,7 @@
 @import "vendor/foundation/foundation/functions"; //NOTE: This is needed by '_settings.scss';
 @import "settings"; // Foundation setting override per project base. This is needed before loading the components
 @import "vendor/foundation/foundation/components/inline-lists";
-//@import "vendor/foundation/foundation/components/buttons";
+@import "vendor/foundation/foundation/components/buttons";
 //@import "vendor/foundation/foundation/components/grid";
 //@import "vendor/foundation/foundation/components/top-bar";
 //@import "vendor/foundation/foundation/components/type";
@@ -51,5 +51,4 @@
 @import "modules/global"; //This should be the first module you load
 @import "modules/form";
 @import "modules/style-hint";
-@import "modules/visibility-toggles";
 @import "modules/hack"; //This should be the last module you load

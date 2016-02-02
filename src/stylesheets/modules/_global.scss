@@ -34,7 +34,8 @@ html {
             margin: 0 1%;
         }
 
-        .encodings-container {
+        .input-form,
+        .output-form {
             @include clearfix();
         }
     }

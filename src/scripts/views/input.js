@@ -17,16 +17,6 @@ var Utils = require('../base/utils');
 
 var InputView = View.extend({
 
-    template: '<div class="form-block">' +
-                '<label>[Label]</label>' +
-                '<textarea class="input"></textarea>' +
-              '</div>',
-
-    render: function() {
-        this.renderWithTemplate(this);
-        return this;
-    },
-
     props: {
     },
 
@@ -34,6 +24,8 @@ var InputView = View.extend({
     },
 
     events: {
+        'focus input': '_inputFocusHandler',
+        'focusout input': '_inputFocusOutHandler',
     },
 
     initialize: function () {
@@ -47,6 +39,16 @@ var InputView = View.extend({
     },
 
     // Event Handlers ----------------
+
+    _inputFocusHandler: function (e) {
+        //log('_inputFocusHandler triggered');
+        this.el.classList.add('is-focused');
+    },
+
+    _inputFocusOutHandler: function (e) {
+        //log('_inputFocusOutHandler triggered');
+        this.el.classList.remove('is-focused');
+    },
 
     // Private Methods ----------------
 
