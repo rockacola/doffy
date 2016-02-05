@@ -10,68 +10,85 @@
 </head>
 <body>
     <div class="outline" data-hook="outline">
-        <div class="wrapper wrapper--relative">
 
-            <div class="intro">
-                <h1>doffy</h1>
-                <p class="blurb">
-                    doffy is a Chrome web app computes Depth of Field of specific lens attributes.
-                </p>
+        <!--
+        <section class="page-header">
+            <div class="wrapper wrapper&#45;&#45;relative">
             </div>
+        </section>
+        -->
 
-            <div class="input-form">
-                <div class="form-block" data-hook="input--coc" data-type="coc" data-unit="mm">
-                    <label>Circle of Confusion</label>
-                    <input type="text" class="input"></input>
-                </div>
-                <div class="form-block" data-hook="input--focal-length" data-type="focal-length" data-unit="mm">
-                    <label>Focal Length</label>
-                    <input type="text" class="input"></input>
-                </div>
-                <div class="form-block" data-hook="input--aperture" data-type="aperture" data-unit="f/">
-                    <label>Aperture</label>
-                    <input type="text" class="input"></input>
-                </div>
-                <div class="form-block" data-hook="input--focus-distance" data-type="focus-distance" data-unit="mm">
-                    <label>Focus Distance</label>
-                    <input type="text" class="input"></input>
-                </div>
-            </div>
+        <section class="page-content">
 
-            <div class="operators">
-                <button class="button small" data-hook="calculate">Calculate</button>
-            </div>
+            <div class="wrapper wrapper--relative">
 
-            <div class="blurb">
-                <h3>Results</h3>
-            </div>
+                <div class="intro">
+                    <h1>doffy</h1>
+                    <p class="blurb">
+                        doffy is a Chrome web app computes Depth of Field of specific lens attributes.
+                    </p>
+                </div>
 
-            <div class="output-form">
-                <div class="form-block is-disabled" data-hook="input--dof">
-                    <label>Depth of Field</label>
-                    <input type="text" class="input" disabled></input>
+                <div class="input-form">
+                    <div class="form-block" data-hook="input--coc" data-type="coc" data-unit="mm">
+                        <label>Circle of Confusion</label>
+                        <input type="text" class="input"></input>
+                    </div>
+                    <div class="form-block" data-hook="input--focal-length" data-type="focal-length" data-unit="mm">
+                        <label>Focal Length</label>
+                        <input type="text" class="input"></input>
+                    </div>
+                    <div class="form-block" data-hook="input--aperture" data-type="aperture" data-unit="f/">
+                        <label>Aperture</label>
+                        <input type="text" class="input"></input>
+                    </div>
+                    <div class="form-block" data-hook="input--focus-distance" data-type="focus-distance" data-unit="mm">
+                        <label>Focus Distance</label>
+                        <input type="text" class="input"></input>
+                    </div>
                 </div>
-                <div class="form-block is-disabled" data-hook="input--hd">
-                    <label>Hyperfocal Distance</label>
-                    <input type="text" class="input" disabled></input>
+
+                <div class="operators">
+                    <button class="button small" data-hook="calculate">Calculate</button>
                 </div>
-                <div class="form-block is-disabled" data-hook="input--near">
-                    <label>Near Limit</label>
-                    <input type="text" class="input" disabled></input>
+
+                <div class="blurb">
+                    <h3>Results</h3>
                 </div>
-                <div class="form-block is-disabled" data-hook="input--far">
-                    <label>Far Limit</label>
-                    <input type="text" class="input" disabled></input>
+
+                <div class="output-form">
+                    <div class="form-block is-disabled" data-hook="input--dof">
+                        <label>Depth of Field</label>
+                        <input type="text" class="input" disabled></input>
+                    </div>
+                    <div class="form-block is-disabled" data-hook="input--hd">
+                        <label>Hyperfocal Distance</label>
+                        <input type="text" class="input" disabled></input>
+                    </div>
+                    <div class="form-block is-disabled" data-hook="input--near">
+                        <label>Near Limit</label>
+                        <input type="text" class="input" disabled></input>
+                    </div>
+                    <div class="form-block is-disabled" data-hook="input--far">
+                        <label>Far Limit</label>
+                        <input type="text" class="input" disabled></input>
+                    </div>
                 </div>
             </div>
+        </section>
+
+        <!--
+        <section class="page-footer">
+            <div class="wrapper wrapper&#45;&#45;relative">
+            </div>
+        </section>
+        -->
+
+        <div class="style-hint">
+            <div class="meta meta--width"></div>
+            <div class="meta meta--orientation"></div>
         </div>
+        <script src="js/app.js"></script>
     </div>
-
-    <div class="style-hint">
-        <div class="meta meta--width"></div>
-        <div class="meta meta--orientation"></div>
-    </div>
-
-    <script src="js/app.js"></script>
 </body>
 </html>
