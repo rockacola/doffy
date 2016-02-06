@@ -44,12 +44,38 @@ var machine = {
     },
 
     fn: function (inputs, exits) {
+        //TODO: validate
+        if(!inputs) {
+            //TODO: Error
+        }
+        //TODO: property null check as null != isNaN
+        if(isNaN(inputs.coc)) {
+            //TODO: Error
+        }
+        if(isNaN(inputs.focalLength)) {
+            //TODO: Error
+        }
+        if(isNaN(inputs.aperture)) {
+            //TODO: Error
+        }
+        if(isNaN(inputs.focusDistance)) {
+            //TODO: Error
+        }
+        //TODO: Focus distance must be greater than focal length
+
+        // Act
+        var hd = (inputs.focalLength * inputs.focalLength) / (inputs.aperture * inputs.coc) + inputs.aperture;
+        var near = (inputs.focusDistance * (hd - inputs.focalLength)) / (hd + inputs.focusDistance - (2*inputs.focalLength));
+        var far = (hd <= inputs.focusDistance) ? Infinity : (inputs.focusDistance * (hd - inputs.focalLength)) / (hd - inputs.focusDistance);
+
         var output = {
-            focusLimitNear: 4245.53,
-            focusLimitFar: 6080.57,
-            dof: 1835.04,
-            hyperfocalDistance: 27904.59,
+            focusLimitNear: near,
+            focusLimitFar: far,
+            dof: isFinite(far) ? far - near : Infinity,
+            hyperfocalDistance: hd,
         };
+
+        console.log('foo bar. output:', output);
 
         return exits.success(output);
     },

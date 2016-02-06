@@ -67,12 +67,14 @@ var MainView = View.extend({
         e.preventDefault();
         var _this = this;
 
-        Machinepacks.Dof.Calculate({
-            coc: 0.032,
-            focalLength: 50,
-            aperture: 2.8,
-            focusDistance: 5000
-        }).exec({
+        var inputs = {
+            coc: Utils.find(this.formInputViews, {type: 'coc'}).GetValue(),
+            focalLength: Utils.find(this.formInputViews, {type: 'focal-length'}).GetValue(),
+            aperture: Utils.find(this.formInputViews, {type: 'aperture'}).GetValue(),
+            focusDistance: Utils.find(this.formInputViews, {type: 'focus-distance'}).GetValue(),
+        };
+
+        Machinepacks.Dof.Calculate(inputs).exec({
             error: function(err) {
                 log('DofCalculator.calculate error!', err);
             },
@@ -95,10 +97,10 @@ var MainView = View.extend({
     _setResult: function(result) {
         log('_setResult triggered. result:', result);
 
-        Utils.find(this.formOutputViews, {type: 'dof'}).SetValue(result.dof);
-        Utils.find(this.formOutputViews, {type: 'hyperfocal-distance'}).SetValue(result.hyperfocalDistance);
-        Utils.find(this.formOutputViews, {type: 'near-limit'}).SetValue(result.focusLimitNear);
-        Utils.find(this.formOutputViews, {type: 'far-limit'}).SetValue(result.focusLimitFar);
+        Utils.find(this.formOutputViews, {type: 'dof'}).SetValue(parseInt(result.dof));
+        Utils.find(this.formOutputViews, {type: 'hyperfocal-distance'}).SetValue(parseInt(result.hyperfocalDistance));
+        Utils.find(this.formOutputViews, {type: 'near-limit'}).SetValue(parseInt(result.focusLimitNear));
+        Utils.find(this.formOutputViews, {type: 'far-limit'}).SetValue(parseInt(result.focusLimitFar));
     },
 
 

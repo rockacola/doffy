@@ -64,6 +64,11 @@ var InputView = View.extend({
         this.$input.value = value;
     },
 
+    GetValue: function() {
+        //TODO: extend this to do validation, sanitization and unit conversion
+        return this.$input.value;
+    },
+
 });
 
 
