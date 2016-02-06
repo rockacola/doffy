@@ -27,18 +27,21 @@ html {
     background-color: white;
     min-height: 100%;
 
-    > .wrapper {
-        padding: 20px 40px;
+    .page-content {
+        > .wrapper {
+            padding: 20px 40px;
 
-        .intro {
-            margin: 0 1%;
-        }
+            .intro {
+                margin: 0 1%;
+            }
 
-        .input-form,
-        .output-form {
-            @include clearfix();
+            .input-form,
+            .output-form {
+                @include clearfix();
+            }
         }
     }
+
 
     @media #{$medium-up} {
         width: 600px;
