@@ -18,7 +18,7 @@ var MainView = require('./views/main');
 
 var TheInstance = window.App = window.App || {
 
-        isDebug: true, // Whether the application is run in debug mode
+        isDebug: false, // Whether the application is run in debug mode
         //clickOrTouch: 'click',
 
         init: function () {

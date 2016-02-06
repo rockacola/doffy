@@ -1,6 +1,6 @@
 {
   "name": "WebApp",
-  "version": "0.0.0",
+  "version": "3.0.0",
   "private": true,
   "dependencies": {
     "ampersand-app": "^1.0.4",
