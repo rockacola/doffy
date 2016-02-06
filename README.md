@@ -46,8 +46,10 @@ TBA. Some resources to get started with Node Machine: http://node-machine.org/
 ## Progress
 
 ### Todo List
-* Update icons and favicon
-* Provide CoC information
+* Info in accordion
+* Provide CoC information/chart
+* Input validations
+* ability to convert units
 * Provide (?) on each attribute and overlay to show help information.
 * Image illustration on the DoF
 

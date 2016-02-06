@@ -51,10 +51,7 @@
         z-index: 100;
     }
 
-    &[data-type="coc"],
-    &[data-type="focal-length"],
-    &[data-type="aperture"],
-    &[data-type="focus-distance"] {
+    &[data-unit] {
         position: relative;
         &::before {
             content: attr(data-unit);
