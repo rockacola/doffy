@@ -12,7 +12,7 @@ var machine = {
             required: true,
         },
         focalLength: {
-            example: 0.032,
+            example: 50,
             description: 'Lens focal length parameter in millimetres.',
             required: true,
         },
@@ -44,38 +44,45 @@ var machine = {
     },
 
     fn: function (inputs, exits) {
-        //TODO: validate
-        if(!inputs) {
-            //TODO: Error
+        // NOTE:
+        // No needs to null check 'inputs' as the input requirements are set per machine definition.
+        // There are also no needs to datatype check as machine will automatically pick up expecting datatype base
+        // on example value. More on inputs: http://node-machine.org/implementing/Understanding-Inputs
+
+        if(inputs.coc <= 0) {
+            return exits.invalidInputParameter('Invalid coc supplied.');
         }
-        //TODO: property null check as null != isNaN
-        if(isNaN(inputs.coc)) {
-            //TODO: Error
+        if(inputs.focalLength <= 0) {
+            return exits.invalidInputParameter('Invalid focalLength supplied.');
         }
-        if(isNaN(inputs.focalLength)) {
-            //TODO: Error
+        if(inputs.aperture <= 0) {
+            return exits.invalidInputParameter('Invalid aperture supplied.');
         }
-        if(isNaN(inputs.aperture)) {
-            //TODO: Error
+        if(inputs.focusDistance <= 0) {
+            return exits.invalidInputParameter('Invalid focusDistance supplied.');
         }
-        if(isNaN(inputs.focusDistance)) {
-            //TODO: Error
+        if(inputs.focusDistance < inputs.focalLength) {
+            return exits.invalidInputParameter('focusDistance is smaller than focalLength.');
         }
-        //TODO: Focus distance must be greater than focal length
 
         // Act
-        var hd = (inputs.focalLength * inputs.focalLength) / (inputs.aperture * inputs.coc) + inputs.aperture;
-        var near = (inputs.focusDistance * (hd - inputs.focalLength)) / (hd + inputs.focusDistance - (2*inputs.focalLength));
-        var far = (hd <= inputs.focusDistance) ? Infinity : (inputs.focusDistance * (hd - inputs.focalLength)) / (hd - inputs.focusDistance);
+        var hd = ((inputs.focalLength * inputs.focalLength) / (inputs.aperture * inputs.coc)) + inputs.aperture;
+        var near;
+        var far;
+        if(hd > inputs.focusDistance) {
+            near = (hd * inputs.focusDistance) / (hd + inputs.focusDistance);
+            far = (hd * inputs.focusDistance) / (hd - inputs.focusDistance);
+        } else {
+            near = hd / 2;
+            far = Infinity;
+        }
 
         var output = {
-            focusLimitNear: near,
-            focusLimitFar: far,
-            dof: isFinite(far) ? far - near : Infinity,
-            hyperfocalDistance: hd,
+            focusLimitNear: parseInt(near),
+            focusLimitFar: parseInt(far),
+            dof: isFinite(far) ? parseInt(far - near) : Infinity,
+            hyperfocalDistance: parseInt(hd),
         };
-
-        console.log('foo bar. output:', output);
 
         return exits.success(output);
     },
