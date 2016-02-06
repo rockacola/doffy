@@ -29,6 +29,11 @@ doffy is a Chrome web app computes Depth of Field of specific lens attributes.
 
 ---
 
+## Node Machine
+TBA. Some resources to get started with Node Machine: http://node-machine.org/
+
+---
+
 ## Resources
 * Use Revox as design guide: http://pages.revox.io/dashboard/latest/html/form_elements.html
 
